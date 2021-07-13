@@ -9,5 +9,6 @@ public class Testiest {
     @Test
     void name() {
         assertThat(false).isTrue();
+        assertThat(false).isTrue();
     }
 }
