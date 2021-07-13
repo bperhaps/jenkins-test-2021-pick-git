@@ -98,7 +98,7 @@ pipeline {
 
           post {
             success {
-              echo 'Build success :\)'
+              echo 'Build success :)'
             }
           }
         }
