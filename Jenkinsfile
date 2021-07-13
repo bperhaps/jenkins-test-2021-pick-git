@@ -50,7 +50,7 @@ pipeline {
             // 프론트엔드 디렉토리의 정적파일들을 S3 에 올림, 이 전에 반드시 EC2 instance profile 을 등록해야함.
             dir ('./backend/pick-git'){
                 sh '''
-                ./gradle -x test clean build
+                ./gradlew -x test clean build
                 '''
             }
           }
@@ -77,7 +77,7 @@ pipeline {
 
             dir ('./backend/pick-git'){
               sh '''
-                ./gradle test
+                ./gradlew test
                 '''
             }
           }
