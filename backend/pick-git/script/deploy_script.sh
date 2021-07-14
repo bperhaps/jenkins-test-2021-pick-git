@@ -78,14 +78,11 @@ if [ -z $DEPLOY ]; then
 	exit 1
 fi
 
-#build
-./gradlew -x test clean build
-
 ##remove plain jar
-rm ./build/libs/*plain*.jar
+rm ../build/libs/*plain*.jar
 
 #migration
-JAR_PATH=$(find ./build/libs -name "*.jar")
+JAR_PATH=$(find ../build/libs -name "*.jar")
 scp -i $CERTIFICATE_PATH $JAR_PATH $USER@$HOST:$LOCATION
 
 JAR_NAME=${JAR_PATH##*/}
