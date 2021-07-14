@@ -2,10 +2,6 @@ pipeline {
     // 스테이지 별로 다른 거
     agent any
 
-     environment {
-       INSTANCE_PEM = credentials('instances-pem')
-     }
-
     stages {
 //        // 레포지토리를 다운로드 받음
 //        stage('Prepare') {
