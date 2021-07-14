@@ -41,6 +41,7 @@ pipeline {
 
           post {
               success {
+                  sh 'ls'
                   echo 'Successfully build backend'
               }
 
