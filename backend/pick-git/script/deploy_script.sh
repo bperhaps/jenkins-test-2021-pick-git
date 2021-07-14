@@ -61,8 +61,6 @@ while (( "$#" )); do
 	esac
 done
 
-echo "test"
-
 if [ ! -f "$CERTIFICATE_PATH" ]; then
 	echo "Error: certificate is not exist"
 	exit 1
@@ -87,10 +85,9 @@ scp -i $CERTIFICATE_PATH $JAR_PATH $USER@$HOST:$LOCATION
 
 JAR_NAME=${JAR_PATH##*/}
 
-echo $LOCATION
-echo $JAR_NAME
-
 echo "nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
+
+edho "-i $CERTIFICATE_PATH -l $USER $HOST \"PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &\""
 
 ssh -i $CERTIFICATE_PATH -l $USER $HOST "PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
 
