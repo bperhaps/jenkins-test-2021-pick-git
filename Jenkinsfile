@@ -41,7 +41,10 @@ pipeline {
 
           post {
               success {
-                  sh 'echo $(ls)'
+                  dir('./backend/pick-git/build/libs'){
+                    sh 'echo $(ls)'
+                  }
+
                   echo 'Successfully build backend'
               }
 
