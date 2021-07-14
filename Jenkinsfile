@@ -30,7 +30,6 @@ pipeline {
 
         stage('build backend_dev') {
           steps {
-            checkout
             echo 'build backend'
 
             dir ('./backend/pick-git'){
