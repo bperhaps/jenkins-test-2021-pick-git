@@ -4,14 +4,14 @@ pipeline {
 
     stages {
         stage('first front') {
-            when { changeset "frontend/*" }
+            when { changeset "frontend/**" }
             steps {
                 echo 'test1'
             }
         }
 
         stage('second front') {
-            when { changeset "frontend/*" }
+            when { changeset "frontend/**" }
             steps {
                 echo 'test2'
             }
