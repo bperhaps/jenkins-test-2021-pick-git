@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Build') {
             when { changeset "frontend/**" }
             steps {
                 echo 'build backend...'
@@ -16,14 +16,14 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('Test') {
             when { changeset "frontend/**" }
             steps {
                 echo 'Front has no test code.'
             }
         }
 
-        stage('deploy') {
+        stage('Deploy') {
             when { changeset "frontend/**" }
             steps {
                 echo 'deploying...'

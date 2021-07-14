@@ -1,8 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+       INSTANCE_PEM_PATH = credentials('instances-pem-path')
+       HOST = credentials('HOST_PROD')
+    }
+
     stages {
-        stage('build') {
+        stage('Build') {
             when { changeset "backend/**" }
             steps {
                 echo 'build backend...'
@@ -15,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('Test') {
             when { changeset "backend/**" }
             steps {
                 echo 'test backend...'
@@ -28,10 +33,15 @@ pipeline {
             }
         }
 
-        stage('deploy') {
+        stage('Deploy') {
             when { changeset "backend/**" }
             steps {
-                echo 'deploying'
+                echo 'deploying backend...'
+
+                dir('./backend/pick-git/script') {
+                  sh '''
+                    ./deploy_script.sh -c INSTANCE_PEM_PATH -h $HOST -d %PROD
+                }
             }
         }
     }
