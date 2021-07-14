@@ -2,19 +2,7 @@ pipeline {
     // 스테이지 별로 다른 거
     agent any
 
-    stages {
-        stage('first') {
-            steps {
-                echo 'test1'
-            }
-        }
-
-        stage('second') {
-            steps {
-                echo 'test2'
-            }
-        }
-    }
+    when { changeset "backend/*" }
 
     stages {
         stage('first') {
