@@ -28,9 +28,9 @@ pipeline {
 //            }
 //        }
 
-        // aws s3 에 파일을 올림
-        stage('build backend') {
+        stage('build backend_dev') {
           steps {
+            checkout
             echo 'build backend'
 
             dir ('./backend/pick-git'){
@@ -51,7 +51,7 @@ pipeline {
           }
         }
 
-        stage('Test Backend') {
+        stage('Test Backend_dev') {
 //           agent {
 //             docker {
 //               image 'node:latest'
@@ -74,7 +74,7 @@ pipeline {
           }
         }
 
-        stage('Deploy Backend') {
+        stage('Deploy Backend_dev') {
           agent any
 
           steps {
