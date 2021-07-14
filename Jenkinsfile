@@ -30,7 +30,7 @@ pipeline {
 
         stage('build backend_dev') {
           steps {
-            echo 'build backend'
+            echo 'build backend2'
 
             dir ('./backend/pick-git'){
                 sh '''
