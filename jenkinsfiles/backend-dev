@@ -41,6 +41,7 @@ pipeline {
                 dir('./backend/pick-git/script') {
                   sh '''
                     ./deploy_script.sh -c INSTANCE_PEM_PATH -h $HOST -d %PROD
+                  '''
                 }
             }
         }
