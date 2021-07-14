@@ -2,10 +2,9 @@ pipeline {
     // 스테이지 별로 다른 거
     agent any
 
-    when { changeset "backend/*" }
-
     stages {
         stage('first') {
+            when { changeset "backend/*" }
             steps {
                 echo 'test1'
             }
