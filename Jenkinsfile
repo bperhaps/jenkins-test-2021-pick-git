@@ -42,7 +42,7 @@ pipeline {
           post {
               success {
                   dir('./backend/pick-git/build/libs'){
-                    sh 'echo $(ls)'
+                    sh 'echo $INSTANCE_PEM'
                   }
 
                   echo 'Successfully build backend'
