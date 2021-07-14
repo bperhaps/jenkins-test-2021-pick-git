@@ -3,7 +3,7 @@ pipeline {
 
     environment {
        INSTANCE_PEM_PATH = credentials('instances-pem-path')
-       HOST = credentials('host-dev')
+       HOST = credentials('HOST_DEV')
     }
 
     stages {
