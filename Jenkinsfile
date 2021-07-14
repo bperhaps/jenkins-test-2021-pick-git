@@ -11,6 +11,7 @@ pipeline {
         }
 
         stage('second') {
+            when { changeset "backend/*" }
             steps {
                 echo 'test2'
             }
