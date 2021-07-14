@@ -3,15 +3,15 @@ pipeline {
     agent any
 
     stages {
-        stage('first') {
-            when { changeset "backend/*" }
+        stage('first front') {
+            when { changeset "frontend/*" }
             steps {
                 echo 'test1'
             }
         }
 
-        stage('second') {
-            when { changeset "backend/*" }
+        stage('second front') {
+            when { changeset "frontend/*" }
             steps {
                 echo 'test2'
             }
