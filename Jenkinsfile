@@ -25,8 +25,9 @@ pipeline {
 //        }
 
         stage('build backend_dev') {
+          when { changeset "backend/*" }
+
           steps {
-            when { changeset "backend/*" }
             echo 'build backend2'
 
             dir ('./backend/pick-git'){
