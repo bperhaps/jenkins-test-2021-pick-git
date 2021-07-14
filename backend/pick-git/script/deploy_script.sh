@@ -87,7 +87,7 @@ JAR_NAME=${JAR_PATH##*/}
 
 echo "nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
 
-edho "-i $CERTIFICATE_PATH -l $USER $HOST \"PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &\""
+echo "-i $CERTIFICATE_PATH -l $USER $HOST \"PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &\""
 
 ssh -i $CERTIFICATE_PATH -l $USER $HOST "PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
 
