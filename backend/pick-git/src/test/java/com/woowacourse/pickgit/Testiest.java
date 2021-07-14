@@ -12,5 +12,7 @@ public class Testiest {
         assertThat(true).isTrue();
         assertThat(true).isTrue();
         assertThat(true).isTrue();
+        assertThat(true).isTrue();
+        assertThat(true).isTrue();
     }
 }
