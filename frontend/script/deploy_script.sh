@@ -63,6 +63,6 @@ if [ -z $HOST ]; then
 	exit 1
 fi
 
-scp -i $CERTIFICATE_PATH -r ./dist $USER@$HOST:$LOCATION
+scp -i $CERTIFICATE_PATH -r ../dist $USER@$HOST:$LOCATION
 
 echo "deploy finished"
