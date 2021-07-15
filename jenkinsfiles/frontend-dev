@@ -32,7 +32,7 @@ pipeline {
             when { changeset "frontend/**" }
             steps {
                 dir('./frontend/script') {
-                    ssh '''
+                    sh '''
                         chmod 755 ./deploy_script.sh
                         ./deploy_script.sh -c ~/.ssh/EC2-DEV-PICK-GIT.pem -h $HOST
                     '''
