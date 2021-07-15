@@ -5,9 +5,9 @@ pipeline {
         stage('Build') {
             when { changeset "frontend/**" }
             steps {
-                echo 'build backend...'
+                echo 'build frontend...'
 
-                dir('./backend/pick-git') {
+                dir('./frontend') {
                     sh '''
                         yarn
                         yarn build
