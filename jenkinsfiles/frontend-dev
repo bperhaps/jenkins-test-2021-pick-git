@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+       INSTANCE_PEM_PATH = credentials('instances-pem-path')
+       HOST = credentials('HOST_DEV')
+    }
+
     stages {
         stage('Build') {
             when { changeset "frontend/**" }
@@ -26,7 +31,12 @@ pipeline {
         stage('Deploy') {
             when { changeset "frontend/**" }
             steps {
-                echo 'deploying...'
+                dir('./frontend/script') {
+                    sh '''
+                        chmod 755 ./deploy_script.sh
+                        ./deploy_script.sh -c ~/.ssh/EC2-DEV-PICK-GIT.pem -h $HOST
+                    '''
+                }
             }
         }
     }

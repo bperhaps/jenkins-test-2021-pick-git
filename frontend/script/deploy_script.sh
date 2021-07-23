@@ -9,7 +9,6 @@ then
 	echo "		-h (String)	host"
 	echo "		-l (String)	location (defualt /home/ubuntu))"
 	echo "		-u (String)	user (defualt ubuntu)"
-	echo "		-d (String)	deploy mode"
 	exit 1
 fi
 
@@ -18,7 +17,6 @@ PORT=22
 HOST=""
 USER="ubuntu"
 LOCATION="/home/ubuntu"
-DEPLOY=""
 
 #parse options
 while (( "$#" )); do
@@ -52,12 +50,6 @@ while (( "$#" )); do
 				USER=$2
 			fi
 			;;
-		-d|--deploy)
-			if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
-				DEPLOY=$2
-				shift 2
-			fi
-			;;
 	esac
 done
 
@@ -71,26 +63,6 @@ if [ -z $HOST ]; then
 	exit 1
 fi
 
-if [ -z $DEPLOY ]; then
-	echo "Error: deploy option is required"
-	exit 1
-fi
-
-##remove plain jar
-rm ../build/libs/*plain*.jar
-
-#migration
-JAR_PATH=$(find ../build/libs -name "*.jar")
-scp -i $CERTIFICATE_PATH $JAR_PATH $USER@$HOST:$LOCATION
-
-JAR_NAME=${JAR_PATH##*/}
-
-echo "nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
-
-echo "-i $CERTIFICATE_PATH -l $USER $HOST \"PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &\""
-
-ssh -i $CERTIFICATE_PATH -l $USER $HOST "PID=\$(ps -p \$(lsof -ti tcp:8080) o pid=); kill -15 \$PID; sleep 3; nohup java -Dspring.profiles.active=$DEPLOY -jar $LOCATION/$JAR_NAME > pickgit.out 2> pickgit.err < /dev/null &"
-
-
+scp -i $CERTIFICATE_PATH -r ../dist $USER@$HOST:$LOCATION
 
 echo "deploy finished"
