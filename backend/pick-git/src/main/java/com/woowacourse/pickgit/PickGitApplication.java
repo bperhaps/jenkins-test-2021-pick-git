@@ -10,5 +10,4 @@ public class PickGitApplication {
         SpringApplication.run(PickGitApplication.class, args);
     }
 
-
 }
