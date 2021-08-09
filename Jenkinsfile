@@ -13,7 +13,7 @@ pipeline {
                 withSonarQubeEnv('pick-git-sonarqube') {
                     sh'''
                         cd backend/pick-git
-                        /var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/pick-git-sonarqube/bin/sonar-scanner \
+                        ./gradlew sonarqube \
                         -D sonar.login=e67760bad24c56a17b106590e9c0c1e757a30bca \
                         -D sonar.projectKey=pick-git-sonarqube \
                         -D sonar.exclusions=resources/**,**/*.java \
