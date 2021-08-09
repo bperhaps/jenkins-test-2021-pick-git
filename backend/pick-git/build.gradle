@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.sonarqube' version '2.8'
 }
 
 group = 'com.woowacourse'
@@ -13,10 +14,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-	useJUnitPlatform()
 }
