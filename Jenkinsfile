@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '${sha1}']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_bperhaps', name: 'origin', refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/bperhaps/jenkins-test-2021-pick-git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '${branch_name}']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: true, recursiveSubmodules: true, reference: '', trackingSubmodules: true]], userRemoteConfigs: [[credentialsId: 'github_bperhaps', url: 'https://github.com/bperhaps/jenkins-test-2021-pick-git/']]])
             }
         }
 
