@@ -28,6 +28,7 @@ pipeline {
                 script {
                     def qg = waitForQualityGate();
                     echo "${qg.status}"
+                    
                 }
             }
         }
